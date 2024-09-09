@@ -1,0 +1,133 @@
+version: "3.9"
+
+services:
+  # HDFS NameNode
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    environment:
+      - CLUSTER_NAME=hadoop-cluster
+    env_file:
+      - ./hadoop.env
+    ports:
+      - "9870:9870"  # HDFS NameNode web UI
+      - "9000:9000"  # HDFS NameNode RPC
+      - "8020:8020"
+    networks:
+      - data_network
+
+  # HDFS DataNode
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    env_file:
+      - ./hadoop.env
+    ports:
+      - "9864:9864"  # HDFS DataNode web UI
+    depends_on:
+      - namenode
+    networks:
+      - data_network
+
+  #Spark master
+  # spark-master:
+  #   image: docker.io/bitnami/spark:3.3.2
+  #   container_name: spark-master
+  #   command: bin/spark-class org.apache.spark.deploy.master.Master
+  #   volumes:
+  #     - ./airflow/dags/spark_script:/opt/spark_script
+  #     - ./data:/opt/data
+  #   env_file:
+  #     - ./hadoop.env
+  #   ports:
+  #     - "7077:7077"  # Spark master port
+  #     - "8080:8080"  # Spark master web UI port
+  #   expose: 
+  #     - "7077"
+  #   environment:
+  #     - SPARK_MODE=master
+  #     - SPARK_RPC_AUTHENTICATION_ENABLED=no
+  #     - SPARK_RPC_ENCRYPTION_ENABLED=no
+  #     - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+  #     - SPARK_SSL_ENABLED=no
+  #     - SPARK_USER=spark
+  #   networks:
+  #     - data_network 
+
+  # #Spark worker
+  # spark-worker:
+  #   image: docker.io/bitnami/spark:3.3.2
+  #   command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+  #   container_name: spark-worker
+  #   volumes:
+  #     - ./data:/opt/data
+  #   env_file:
+  #     - ./hadoop.env
+  #     - ./spark_worker.env
+  #   ports:
+  #     - 8081:8081
+  #   depends_on:
+  #     - spark-master
+  #   networks:
+  #     - data_network
+
+  #Airflow
+  airflow:
+    image: airflow:2.10.0
+    container_name: airflow
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./data:/opt/data
+      - ./jars:/opt/jars
+    ports:
+      - 8080:8080
+    command: >
+      bash -c '(airflow db init && 
+      airflow users create 
+      --username admin 
+      --password admin 
+      --firstname Thuan 
+      --lastname Huynh 
+      --role Admin
+      --email HuynhThuan@gmail.com);
+      airflow webserver & airflow scheduler'
+    networks:
+      - data_network
+  #Note book
+  notebook:
+    image: notebook:latest
+    container_name: notebook
+    ports:
+      - 8888:8888
+    volumes:
+      - ./notebook:/home/jovyan/work
+      - ./data:/opt/data
+      - ./jars:/opt/jars
+    networks:
+      - data_network
+  #superset
+  superset:
+    image: apache/superset:27ff8f2-dev
+    container_name: superset
+    environment:
+      - SUPERSET_SECRET_KEY=your_secret_key_here
+    ports:
+      - 8088:8088
+    depends_on:
+      - airflow
+    command: >
+      bash -c "superset db upgrade &&
+               superset fab create-admin
+                 --username admin
+                 --firstname Thuan
+                 --lastname Huynh
+                 --email admin@superset.com
+                 --password admin &&
+               superset init &&
+               superset run -p 8088 --with-threads --reload --debugger"
+    networks:
+      - data_network
+#Network
+networks:
+  data_network:
+    driver: bridge
