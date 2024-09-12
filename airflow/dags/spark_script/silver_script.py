@@ -1,6 +1,6 @@
 from silver_layer import Silverlayer
 from spark_hadoop_io import *
-from pyspark.sql.functions import arrays_zip, explode, col, rtrim, when
+from pyspark.sql.functions import arrays_zip, explode, col, rtrim, when, ltrim
 
 '''
     Processing tables individually
@@ -26,10 +26,6 @@ def athletes_silver(spark: SparkSession, HDFS_load):
                                                 'nickname': 'N/A',
                                                 'residence_place':'N/A', 
                                                 'residence_country':'N/A',
-                                                'nationality':'N/A',
-                                                'nationality_full':'N/A',
-                                                'nationality_code':'N/A',
-                                                'language':'N/A',
                                                 'height':0, 'weight':0}).process()
     #upload hdfs
     upload_HDFS(df_silver, "athletes_silver", HDFS_load + '/athletes_silver/')
@@ -97,19 +93,19 @@ def schedules_silver(spark: SparkSession, HDFS_load):
                             columns_dropDuplicates = ['event', 'discipline', 'phase'],
                             columns_drop           = ['status', 'event_medal', 'url']).process()
     #preprocess to match name of venue before joining 
-    df = df.withColumn('venue', regexp_replace("venue", "\\d", "")) \
-           .withColumn('venue', rtrim('venue')) \
-           .withColumn('venue_code', regexp_replace("venue_code", "\\d", "")) \
-           .withColumn('venue_code', rtrim('venue_code'))
-    df = df.withColumn('venue', when(col('venue') == 'Chateauroux Shooting Ctr', 'Chateauroux Shooting Centre').otherwise(col('venue'))) \
-           .withColumn('venue', when(col('venue') == 'Nautical St - Flat water', 'Vaires-sur-Marne Nautical Stadium').otherwise(col('venue')))\
-           .withColumn('venue', when(col('venue') == 'BMX Stadium', 'Saint-Quentin-en-Yvelines BMX Stadium').otherwise(col('venue')))\
-           .withColumn('venue', when(col('venue') == 'Champ-de-Mars Arena', 'Champ de Mars Arena').otherwise(col('venue')))\
-           .withColumn('venue', when(col('venue') == 'Le Bourget Climbing Venue', 'Le Bourget Sport Climbing Venue').otherwise(col('venue')))\
-           .withColumn('venue', when(col('venue') == 'Nautical St - White water', 'Vaires-sur-Marne Nautical Stadium').otherwise(col('venue')))\
-           .withColumn('venue', when(col('venue') == 'Roland-Garros Stadium', 'Stade Roland-Garros').otherwise(col('venue')))\
-           .withColumn('venue', when(col('venue') == 'Le Golf National', 'Golf National').otherwise(col('venue')))\
-           .withColumn('venue', when(col('venue') == 'National Velodrome', 'Saint-Quentin-en-Yvelines Velodrome').otherwise(col('venue')))
+    df_silver = df_silver.withColumn('venue', regexp_replace("venue", "\\d", "")) \
+                         .withColumn('venue', rtrim('venue')) \
+                         .withColumn('venue_code', regexp_replace("venue_code", "\\d", "")) \
+                         .withColumn('venue_code', rtrim('venue_code'))
+    df_silver = df_silver.withColumn('venue', when(col('venue') == 'Chateauroux Shooting Ctr', 'Chateauroux Shooting Centre').otherwise(col('venue'))) \
+                         .withColumn('venue', when(col('venue') == 'Nautical St - Flat water', 'Vaires-sur-Marne Nautical Stadium').otherwise(col('venue')))\
+                         .withColumn('venue', when(col('venue') == 'BMX Stadium', 'Saint-Quentin-en-Yvelines BMX Stadium').otherwise(col('venue')))\
+                         .withColumn('venue', when(col('venue') == 'Champ-de-Mars Arena', 'Champ de Mars Arena').otherwise(col('venue')))\
+                         .withColumn('venue', when(col('venue') == 'Le Bourget Climbing Venue', 'Le Bourget Sport Climbing Venue').otherwise(col('venue')))\
+                         .withColumn('venue', when(col('venue') == 'Nautical St - White water', 'Vaires-sur-Marne Nautical Stadium').otherwise(col('venue')))\
+                         .withColumn('venue', when(col('venue') == 'Roland-Garros Stadium', 'Stade Roland-Garros').otherwise(col('venue')))\
+                         .withColumn('venue', when(col('venue') == 'Le Golf National', 'Golf National').otherwise(col('venue')))\
+                         .withColumn('venue', when(col('venue') == 'National Velodrome', 'Saint-Quentin-en-Yvelines Velodrome').otherwise(col('venue')))
     #upload hdfs
     upload_HDFS(df_silver, 'schedules_silver', HDFS_load + '/schedules_silver/')
 
@@ -153,6 +149,8 @@ def teams_silver(spark: SparkSession, HDFS_load):
     df_silver = df_silver.withColumn('athletes_id_merge', explode('athletes_id_merge'))
     df_silver = df_silver.withColumn('athletes', col('athletes_id_merge.athletes')) \
                          .withColumn('athletes_id', col('athletes_id_merge.athletes_codes'))
+    df_silver = df_silver.withColumn('athletes', ltrim('athletes')) \
+                         .withColumn('athletes_id', ltrim('athletes_id'))
     df_silver = df_silver.drop('athletes_id_merge')
     #upload hdfs
     upload_HDFS(df_silver, 'teams_silver', HDFS_load + '/teams_silver/')

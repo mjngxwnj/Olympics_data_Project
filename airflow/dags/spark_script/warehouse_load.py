@@ -8,8 +8,8 @@ if __name__ == "__main__":
     
     #list all table name
     table_name = ['dim_medal', 'dim_discipline', 'dim_event', 
-                  'dim_country', 'fact_medallist', 'dim_athletes', 
-                  'dim_team', 'fact_schedule', 'dim_venue']
+                  'dim_country', 'fact_medallist', 'dim_athletes', 'fact_medal_team',
+                  'dim_team', 'fact_schedule', 'dim_venue', 'dim_athletes_team']
     #hdfs file to read
     HDFS_read = "hdfs://namenode:9000/datalake/gold_storage"
     #loop for calling function

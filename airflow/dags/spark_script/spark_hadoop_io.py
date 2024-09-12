@@ -69,7 +69,7 @@ def get_snowflake_sparkSession(appName: str, master: str = 'local'):
 sfOptions_default = {
     "sfURL": "https://ae58556.ap-southeast-1.snowflakecomputing.com",
     "sfUser": "HUYNHTHUAN",
-    "sfPassword": "Thuan0355389551",
+    "sfPassword": "********", #hide password
     "sfDatabase": "OLYMPICS_DB",
     "sfSchema": "OLYMPICS_SCHEMA",
     "sfWarehouse": "COMPUTE_WH",

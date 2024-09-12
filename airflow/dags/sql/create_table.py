@@ -37,6 +37,16 @@ create_fact_medallist = '''
     );
 '''
 
+create_fact_medal_team = '''
+    CREATE TABLE IF NOT EXISTS {{ params.table_name }} (
+        medal_team_id VARCHAR(15) PRIMARY KEY,
+        team_id VARCHAR(15),
+        medal_id SMALLINT,
+        discipline_id VARCHAR(4),
+        event_id VARCHAR(6)
+    );
+'''
+
 create_dim_athletes = '''
     CREATE TABLE IF NOT EXISTS {{ params.table_name }} (
         athletes_id VARCHAR(15) PRIMARY KEY,
@@ -47,8 +57,7 @@ create_dim_athletes = '''
         nationality_id VARCHAR(5),
         height INT,
         weight INT,
-        birth_date DATE,
-        team_id VARCHAR(25)
+        birth_date DATE
     );
 '''
 
@@ -56,8 +65,17 @@ create_dim_team = '''
     CREATE TABLE IF NOT EXISTS {{ params.table_name }} (
         team_id VARCHAR(25) PRIMARY KEY,
         team_name VARCHAR(35),
-        team_gender CHAR(1)
+        team_gender CHAR(1),
+        country_id VARCHAR(5)
     )
+'''
+
+create_dim_athletes_team = '''
+    CREATE TABLE IF NOT EXISTS {{ params.table_name }} (
+        athletes_id VARCHAR(15),
+        team_id VARCHAR(25)
+    );
+    
 '''
 
 create_fact_schedule = '''

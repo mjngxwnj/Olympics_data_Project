@@ -1,0 +1,82 @@
+
+individual_medal_count_by_country = '''
+    CREATE TABLE IF NOT EXISTS {{ params.table_name }} AS (
+        WITH medallist(ATHLETES_ID, COUNTRY_ID, COUNTRY_NAME, MEDAL_TYPE) AS (
+            SELECT FM.ATHLETES_ID, DA.COUNTRY_ID, COUNTRY_NAME, MEDAL_TYPE
+            FROM FACT_MEDALLIST FM
+            JOIN DIM_ATHLETES DA ON FM.ATHLETES_ID = DA.ATHLETES_ID
+            JOIN DIM_MEDAL DM ON FM.MEDAL_ID = DM.MEDAL_ID
+            JOIN DIM_COUNTRY DC ON DA.COUNTRY_ID = DC.COUNTRY_ID
+        )
+        SELECT COUNTRY_ID, COUNTRY_NAME COUNTRY,
+        SUM(CASE WHEN MEDAL_TYPE = 'Gold Medal' THEN 1 ELSE 0 END) GOLD,
+        SUM(CASE WHEN MEDAL_TYPE = 'Silver Medal' THEN 1 ELSE 0 END) SILVER,
+        SUM(CASE WHEN MEDAL_TYPE = 'Bronze Medal' THEN 1 ELSE 0 END) BRONZE,
+        COUNT(*) TOTAL
+        FROM medallist
+        GROUP BY COUNTRY_ID, COUNTRY_NAME
+        ORDER BY TOTAL DESC
+    );
+'''
+
+team_medal_count_by_country = '''
+    CREATE TABLE IF NOT EXISTS {{ params.table_name }} AS (
+        WITH medal_team(TEAM_NAME, COUNTRY_ID, COUNTRY_NAME, MEDAL_TYPE) AS(
+            SELECT TEAM_NAME, DM.COUNTRY_ID, COUNTRY_NAME, MEDAL_TYPE
+            FROM FACT_MEDAL_TEAM FT
+            JOIN DIM_TEAM DM ON FT.TEAM_ID = DM.TEAM_ID
+            JOIN DIM_MEDAL DME ON FT.MEDAL_ID = DME.MEDAL_ID
+            JOIN DIM_COUNTRY DC ON DM.COUNTRY_ID = DC.COUNTRY_ID
+        )
+        SELECT COUNTRY_ID, COUNTRY_NAME COUNTRY,
+        SUM(CASE WHEN MEDAL_TYPE = 'Gold Medal' THEN 1 ELSE 0 END) GOLD,
+        SUM(CASE WHEN MEDAL_TYPE = 'Silver Medal' THEN 1 ELSE 0 END) SILVER,
+        SUM(CASE WHEN MEDAL_TYPE = 'Bronze Medal' THEN 1 ELSE 0 END) BRONZE,
+        COUNT(*) TOTAL
+        FROM medal_team
+        GROUP BY COUNTRY_ID, COUNTRY_NAME
+        ORDER BY TOTAL DESC
+    );
+'''
+
+total_medal_count_by_country = '''
+    CREATE TABLE IF NOT EXISTS {{ params.table_name }} AS (
+        SELECT IM.COUNTRY,
+        IM.GOLD + TM.GOLD GOLD,
+        IM.SILVER + TM.SILVER SILVER,
+        IM.BRONZE + TM.BRONZE BRONZE,
+        IM.TOTAL + TM.TOTAL TOTAL
+        FROM INDIVIDUAL_MEDAL_COUNT_BY_COUNTRY IM
+        JOIN TEAM_MEDAL_COUNT_BY_CONTRY TM ON IM.COUNTRY_ID = TM.COUNTRY_ID
+        ORDER BY TOTAL DESC
+        LIMIT 10
+    );
+'''
+
+total_medal_count_by_age = '''
+    CREATE TABLE IF NOT EXISTS {{ params.table_name }} AS (
+        WITH INDIVIDUAL_MEDAL_AGE(AGE) AS(
+            SELECT 
+            DATEDIFF(YEAR, BIRTH_DATE, '2024-08-11') AGE,
+            FROM FACT_MEDALLIST FM
+            JOIN DIM_ATHLETES DA ON FM.ATHLETES_ID = DA.ATHLETES_ID
+        ),
+        TEAM_MEDAL_AGE(AGE) AS(
+            SELECT 
+            DATEDIFF(YEAR, BIRTH_DATE, '2024-08-11') AGE,
+            FROM FACT_MEDAL_TEAM FT
+            JOIN DIM_TEAM DT ON FT.TEAM_ID = DT.TEAM_ID
+            JOIN DIM_ATHLETES_TEAM DAT ON DT.TEAM_ID = DAT.TEAM_ID
+            JOIN DIM_ATHLETES DA ON DAT.ATHLETES_ID = DA.ATHLETES_ID
+        ),
+        TOTAL_MEDAL_AGE(AGE) AS(
+            SELECT AGE FROM INDIVIDUAL_MEDAL_AGE
+            UNION ALL
+            SELECT AGE FROM TEAM_MEDAL_AGE
+        )
+        SELECT AGE, COUNT(*) TOTAL
+        FROM TOTAL_MEDAL_AGE
+        GROUP BY AGE
+        ORDER BY AGE
+    )
+'''

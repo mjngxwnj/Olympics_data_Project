@@ -93,6 +93,7 @@ services:
       airflow webserver & airflow scheduler'
     networks:
       - data_network
+
   #Note book
   notebook:
     image: notebook:latest
@@ -105,26 +106,25 @@ services:
       - ./jars:/opt/jars
     networks:
       - data_network
+
   #superset
   superset:
-    image: apache/superset:27ff8f2-dev
+    image: superset:latest
     container_name: superset
     environment:
-      - SUPERSET_SECRET_KEY=your_secret_key_here
+      - SUPERSET_SECRET_KEY=superset_key
     ports:
       - 8088:8088
-    depends_on:
-      - airflow
     command: >
-      bash -c "superset db upgrade &&
-               superset fab create-admin
-                 --username admin
-                 --firstname Thuan
-                 --lastname Huynh
-                 --email admin@superset.com
-                 --password admin &&
-               superset init &&
-               superset run -p 8088 --with-threads --reload --debugger"
+      bash -c '(superset db upgrade && 
+      superset fab create-admin 
+      --username admin 
+      --firstname Thuan 
+      --lastname Huynh 
+      --email admin@superset.com 
+      --password admin);
+      superset init &&
+      gunicorn --bind 0.0.0.0:8088 --workers 4 "superset.app:create_app()"'
     networks:
       - data_network
 #Network
