@@ -12,26 +12,32 @@ def bronze_task(spark: SparkSession, tables: list, HDFS_load: str):
         if table_name == 'athletes':
             #read data from csv file
             data = spark.read.csv("/opt/data/athletes.csv", header = True)
+
             #replace unnecessary character 
             data = data.withColumn("disciplines", regexp_replace("disciplines", "[\[\]']", "")) \
                         .withColumn("events", regexp_replace("events","[\[\]']","")) 
+            
+            #transform data type
             data = data.withColumn("disciplines", split(data["disciplines"],",")) \
                         .withColumn("events", split(data["events"],",")) \
                         .withColumn("height", col("height").cast("int")) \
                         .withColumn("weight", col("weight").cast("int")) \
                         .withColumn("birth_date", to_date(col("birth_date"), "yyyy-mm-dd")) \
                         .withColumn("lang", split(data["lang"],","))
+            
             #create dataFrame
             df = spark.createDataFrame(data.rdd, schema = get_schema(table_name))
 
         elif table_name == "teams":
             #read data from csv file
             data = spark.read.csv("/opt/data/teams.csv", header = True)
+
             #replace unnecessary characters
             data = data.withColumn("athletes", regexp_replace("athletes","[\[\]']","")) \
                     .withColumn("coaches", regexp_replace("coaches","[\[\]']","")) \
                     .withColumn("athletes_codes", regexp_replace("athletes_codes","[\[\]']","")) \
                     .withColumn("coaches_codes", regexp_replace("coaches_codes","[\[\]']",""))
+            
             #transform data type
             data = data.withColumn("athletes", split(data["athletes"],",")) \
                     .withColumn("coaches", split(data["coaches"],",")) \
@@ -39,17 +45,20 @@ def bronze_task(spark: SparkSession, tables: list, HDFS_load: str):
                     .withColumn("coaches_codes", split(data["coaches_codes"],",")) \
                     .withColumn("num_athletes", col("num_athletes").cast("int")) \
                     .withColumn("num_coaches", col("num_coaches").cast("int"))
+            
             #create dataFrame
             df = spark.createDataFrame(data.rdd, schema = get_schema(table_name))
 
         elif table_name == 'venues':
             #read data from csv file
             data = spark.read.csv("/opt/data/venues.csv", header = True)
+
             #replace unnecessary characters
             data = data.withColumn("sports", regexp_replace("sports","[\[\]']",""))
             data = data.withColumn("sports", split(data["sports"],",")) \
                     .withColumn("date_start", col("date_start").cast("timestamp")) \
                     .withColumn("date_end", col("date_end").cast("timestamp"))
+            
             #create dataFrame
             df = spark.createDataFrame(data.rdd, schema = get_schema(table_name)) 
 

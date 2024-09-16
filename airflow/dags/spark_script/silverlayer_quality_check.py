@@ -16,6 +16,7 @@ def check_data(spark: SparkSession, HDFS_path: str, tables: list):
 
         #count the number of null values in each column of the table
         df_checkNull = {col:df.filter(df[col].isNull()).count() for col in df.columns}
+
         for col, num in df_checkNull.items():
             print(f'Number of null values in column "{col}": {num}')
 
@@ -30,6 +31,7 @@ if __name__ == '__main__':
 
     #path
     HDFS_path = "hdfs://namenode:9000/datalake/silver_storage"
+    
     with get_sparkSession("check_quality_data_spark") as spark:
         check_data(spark, HDFS_path, tables)
 

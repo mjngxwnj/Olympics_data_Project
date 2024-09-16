@@ -11,7 +11,9 @@ def get_sparkSession(appName: str, master: str = 'local'):
     conf.setMaster(master)
     conf.set("spark.executor.memory", "2g") \
         .set("spark.executor.cores", "2")
+    
     spark = SparkSession.builder.config(conf = conf).getOrCreate()
+    
     print(f"Successfully create SparkSession with app name: {appName}, master: {master}\n")
     try:
         yield spark
@@ -29,6 +31,7 @@ def upload_HDFS(dataFrame: DataFrame, table_name: str, HDFS_path: str) -> None:
         raise TypeError("table name must be a string!")
     if not HDFS_path.startswith("hdfs://namenode:9000/"):
         raise TypeError('HDFS path must start with "hdfs://namenode:9000/"')
+    
     #upload data
     dataFrame.write.parquet(HDFS_path, mode = 'overwrite')
     print("========================================================")
@@ -43,6 +46,7 @@ def read_HDFS(spark: SparkSession, HDFS_path: str) -> DataFrame:
         raise TypeError("spark must be a Spark Session!")
     if not HDFS_path.startswith("hdfs://namenode:9000/"):
         raise TypeError('HDFS path must start with "hdfs://namenode:9000/"')
+    
     #read file
     data = spark.read.parquet(HDFS_path, header = True)
     return data
@@ -57,7 +61,9 @@ def get_snowflake_sparkSession(appName: str, master: str = 'local'):
         .set("spark.executor.cores", "2") \
         .set("spark.jars","/opt/jars/snowflake-jdbc-3.19.0.jar, \
                            /opt/jars/spark-snowflake_2.12-2.12.0-spark_3.4.jar")
+    
     spark = SparkSession.builder.config(conf = conf).getOrCreate()
+
     print(f"Successfully create SparkSession for Snowflake with app name: {appName}, master: {master}\n")
     try:
         yield spark
@@ -83,6 +89,7 @@ def load_snowflake(dataFrame: DataFrame, table_name: str, sfOptions: dict = sfOp
         raise TypeError("data must be a DataFrame!")
     if not isinstance(table_name, str):
         raise TypeError("table name must be a string!")
+    
     #upload data
     dataFrame.write \
         .format("snowflake") \

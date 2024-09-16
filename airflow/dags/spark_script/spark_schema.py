@@ -17,6 +17,7 @@ def get_schema(table_name):
     
     cols3 = ['coach', 'reason', 'hero', 'influence', 'philosophy', 
              'sporting_relatives', 'ritual', 'other_sports']
+    
     #create schema for athletes table
     athletes_schema  = [StructField(col, StringType(), True) for col in cols]
     athletes_schema += [StructField('height', IntegerType(), True),
