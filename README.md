@@ -7,4 +7,17 @@ This projects focuses on building an end-to-end data pipeline that extracts raw 
 
 
 ## Architecture
-![Alt text](URL_of_the_image)
+![Alt text](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
+## Overview
+### Directory tree
+```
+.
+├───airflow                # Airflow folder
+│   └───dags               # Directory for DAG files (main.py file)
+│       ├───spark_script   # Directory for Spark script files for the pipeline
+│       └───sql            # Directory for SQL scripts (creating and querying tables)
+├───data                   # Data files
+├───images                 # Images
+├───jars                   # JAR files for configuration between Spark and Snowflake
+└───notebook               # Notebooks for Exploratory Data Analysis (EDA)
+```
