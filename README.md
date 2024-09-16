@@ -7,4 +7,4 @@ This projects focuses on building an end-to-end data pipeline that extracts raw 
 
 
 ## Architecture
-dasd
+![Alt text](URL_of_the_image)
