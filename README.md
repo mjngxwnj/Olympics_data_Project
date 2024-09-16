@@ -7,4 +7,4 @@ This projects focuses on building an end-to-end data pipeline that extracts raw 
 
 
 ## Architecture
-![Alt text](URL_of_the_image)
+![Alt text](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
