@@ -7,7 +7,7 @@ This projects focuses on building an end-to-end data pipeline that extracts raw 
 
 
 ## Architecture
-![Alt text](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
+![Architecture](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
 ## Overview
 ### Directory tree
 ```
@@ -21,3 +21,5 @@ This projects focuses on building an end-to-end data pipeline that extracts raw 
 ├───jars                   # JAR files for configuration between Spark and Snowflake
 └───notebook               # Notebooks for Exploratory Data Analysis (EDA)
 ```
+### Schema
+![Schema](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_schema.png)
