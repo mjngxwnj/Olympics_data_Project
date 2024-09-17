@@ -5,6 +5,7 @@ def get_schema(table_name):
     '''
         Create schema for athletes table
     '''
+
     #list of columns containing string type
     cols = ['code', 'name', 'name_short', 'name_tv',
             'gender', 'function', 'country_code',
@@ -21,14 +22,14 @@ def get_schema(table_name):
     #create schema for athletes table
     athletes_schema  = [StructField(col, StringType(), True) for col in cols]
     athletes_schema += [StructField('height', IntegerType(), True),
-                       StructField('weight', IntegerType(), True),
-                       StructField('disciplines', ArrayType(StringType(),True), True),
-                       StructField('events', ArrayType(StringType(),True)),
-                       StructField('birth_date', DateType(), True)]
+                        StructField('weight', IntegerType(), True),
+                        StructField('disciplines', ArrayType(StringType(),True), True),
+                        StructField('events', ArrayType(StringType(),True)),
+                        StructField('birth_date', DateType(), True)]
     athletes_schema += [StructField(col, StringType(), True) for col in cols2]
     athletes_schema += [StructField('lang', ArrayType(StringType(),True),True)]
     athletes_schema += [StructField(col, StringType(), True) for col in cols3]
-    athletes_schema  = StructType(athletes_schema)
+    athletes_schema  =  StructType(athletes_schema)
 
     '''
         Create schema for events table

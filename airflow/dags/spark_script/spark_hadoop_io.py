@@ -19,7 +19,7 @@ def get_sparkSession(appName: str, master: str = 'local'):
         yield spark
     finally:
         spark.stop()
-        print("Spark Sesion has stopped!")
+        print("Spark Session has stopped!")
 
 #input HDFS function
 def upload_HDFS(dataFrame: DataFrame, table_name: str, HDFS_path: str) -> None:
@@ -75,12 +75,13 @@ def get_snowflake_sparkSession(appName: str, master: str = 'local'):
 sfOptions_default = {
     "sfURL": "https://ae58556.ap-southeast-1.snowflakecomputing.com",
     "sfUser": "HUYNHTHUAN",
-    "sfPassword": "********", #hide password
+    "sfPassword": "Thuan0355389551", #hide password
     "sfDatabase": "OLYMPICS_DB",
     "sfSchema": "OLYMPICS_SCHEMA",
     "sfWarehouse": "COMPUTE_WH",
     "sfRole": "ACCOUNTADMIN"
 }
+
 #load data from hdfs to snowflake data warehouse
 def load_snowflake(dataFrame: DataFrame, table_name: str, sfOptions: dict = sfOptions_default):
     print(f'''Starting upload {table_name} into snowflake...''')
