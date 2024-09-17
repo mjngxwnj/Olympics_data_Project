@@ -1,13 +1,13 @@
 # Data Pipeline for Olympics 2024 Analysis
 ## Description
-This projects focuses on building an end-to-end data pipeline that extracts raw data from Kaggle, processes and transforms it across three structured layers (Bronze, Silver and Gold), and stored it in Hadoop HDFS. The final transformed data is then loaded into a Snowflake data warehouse. The entire pipeline is oschetrated using Apache Airflow. For data visualization and reporting, Apache Superset is used to create interactive and informative dashboards.
+This project focuses on building an end-to-end data pipeline that extracts raw data from Kaggle, processes and transforms it across three structured layers (Bronze, Silver, and Gold) using Apache Spark, and stores it in Hadoop HDFS. The final transformed data is then loaded into a Snowflake data warehouse. The entire pipeline is orchestrated using Apache Airflow. For data visualization and reporting, Apache Superset is used to create interactive and informative dashboards.
 ## Table of contents
 - [Architecture](#Architecture)
 - [Overview](#Overview)
 
 
 ## Architecture
-![Alt text](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
+![Architecture](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
 ## Overview
 ### Directory tree
 ```
@@ -21,3 +21,5 @@ This projects focuses on building an end-to-end data pipeline that extracts raw 
 ├───jars                   # JAR files for configuration between Spark and Snowflake
 └───notebook               # Notebooks for Exploratory Data Analysis (EDA)
 ```
+### Schema
+![Schema](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_schema.png)
