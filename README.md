@@ -58,6 +58,8 @@ Go to [localhost:9870](http://localhost:9870).
 
 Initially, HDFS will be empty.
 
+![hdfs_empty](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/HDFS.PNG)
+
 To trigger the DAG, click `trigger DAG` in the top right corner. The pipeline will start.
 
 ![trigger dag](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Dag.PNG)
@@ -65,8 +67,6 @@ To trigger the DAG, click `trigger DAG` in the top right corner. The pipeline wi
 After the DAG runs successfully:
 
 ![dag finish](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Dag_finish.PNG)
-
-![hdfs_empty](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/HDFS.PNG)
 
 As Olympics_data DAG runs, the data will be loaded into HDFS.
 
