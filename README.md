@@ -92,4 +92,4 @@ Then, you can select tables in Snowflake using SQL Lab and create a dashboard ac
 
 Here is my custom dashboard for visualizing data about the Olympics games:
 
-[report](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Superset_report.jpg)
+![report](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Superset_report.jpg)
