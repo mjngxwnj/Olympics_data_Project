@@ -27,7 +27,7 @@ Here is the schema based on snowflake schema model, which includes 3 fact tables
 This schema will be applied in the data warehouse.
 ![Schema](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_schema.png)
 ### Prerequisite
-[Docker](https://www.docker.com/products/docker-desktop)
-[Snowflake account](https://www.snowflake.com/en/data-cloud/platform)
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Snowflake account](https://www.snowflake.com/en/data-cloud/platform)
 ### Set up
 
