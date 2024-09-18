@@ -79,5 +79,3 @@ Then, all tables in data warehouse will be created.
 ![snowflake finish](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_finish.PNG)
 
 
-
-
