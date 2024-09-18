@@ -45,7 +45,7 @@ docker-compose up
 First, go to [localhost:8080](http://localhost:8080), then log in to Airflow with username: `admin`, password: `admin`
 Next, navigate `Admin` -> `Connection`, and edit `spark_default` connection.
 The Spark setting should look like this:
-[spark_default](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Airflow_Spark.PNG)
+![spark_default](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Airflow_Spark.PNG)
 
 
 
