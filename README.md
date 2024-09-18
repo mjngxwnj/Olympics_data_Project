@@ -46,6 +46,14 @@ First, go to [localhost:8080](http://localhost:8080), then log in to Airflow wit
 Next, navigate `Admin` -> `Connection`, and edit `spark_default` connection.
 The Spark setting should look like this:
 ![spark_default](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Airflow_Spark.PNG)
+Save the connection, then go back to the DAGs page to prepare for triggering the DAGs
+### Run pipeline
+![trigger dag](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Dag.PNG)
+To trigger the DAG, click `trigger DAG` in the top right corner. The pipeline will start.
+Initially, HDFS will be empty.
+![hdfs_empty](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/HDFS.PNG)
+As Olympics_data DAG runs, the data will be loaded into HDFS.
+![hdfs_finish]()
 
 
 
