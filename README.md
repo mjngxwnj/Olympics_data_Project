@@ -31,10 +31,15 @@ This schema will be applied in the data warehouse.
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Snowflake account](https://www.snowflake.com/en/data-cloud/platform)
 ## Set up
-Clone this project, using:
+### Set up docker
+Clone this project by running the following commands:
 ```
 git clone https://github.com/mjngxwnj/Olympics_data_Project.git
 cd Olympics_data_Project
 ```
-
+After that, run the following command to start Docker Compose: (Make sure that you downloaded docker and docker is running)
+```
+docker-compose up
+```
+### Set up airflow
 
