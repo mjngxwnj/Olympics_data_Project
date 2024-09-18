@@ -43,6 +43,9 @@ docker-compose up
 ```
 ### Set up Airflow
 At first, go to [localhost:8080](http://localhost:8080), then log in to Airflow with username: `admin`, password: `admin`
-Then, via connections, add spark connection for Airflow.
+Then, via `Admin` -> `Connection`, then edit `spark_default`.
+Setting spark looks like:
+[spark_default]()
+
 
 
