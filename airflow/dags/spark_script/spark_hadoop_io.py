@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import DataFrame
 from pyspark import SparkConf
 from pyspark.sql.functions import col, split, regexp_replace, to_date
+import warehouse_connection
 from contextlib import contextmanager
 #create spark Session
 @contextmanager
@@ -71,16 +72,8 @@ def get_snowflake_sparkSession(appName: str, master: str = 'local'):
         spark.stop()
         print("Spark Sesion has stopped!")
 
-#default config for snowflake
-sfOptions_default = {
-    "sfURL": "https://ae58556.ap-southeast-1.snowflakecomputing.com",
-    "sfUser": "HUYNHTHUAN",
-    "sfPassword": "Thuan0355389551", #hide password
-    "sfDatabase": "OLYMPICS_DB",
-    "sfSchema": "OLYMPICS_SCHEMA",
-    "sfWarehouse": "COMPUTE_WH",
-    "sfRole": "ACCOUNTADMIN"
-}
+#default conf for snowflake
+sfOptions_default = warehouse_connection.sfOptions_default
 
 #load data from hdfs to snowflake data warehouse
 def load_snowflake(dataFrame: DataFrame, table_name: str, sfOptions: dict = sfOptions_default):
@@ -101,4 +94,3 @@ def load_snowflake(dataFrame: DataFrame, table_name: str, sfOptions: dict = sfOp
     print("========================================================")
     print(f'''Successfully upload "{table_name}" into SnowFlake.''')
     print("========================================================")
-
