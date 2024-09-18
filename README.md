@@ -51,6 +51,8 @@ The Spark setting should look like this:
 Save the connection, then go back to the DAGs page to prepare for triggering the DAGs.
 ### Run pipeline
 Go to Snowflake account, navigating Database and create Database OLYMPICS_DB, two Schemas OLYMPICS_SCHEMA and REPORT.
+
+
 ![trigger dag](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Dag.PNG)
 To trigger the DAG, click `trigger DAG` in the top right corner. The pipeline will start.
 
