@@ -33,7 +33,7 @@ This schema will be applied in the data warehouse.
 - [Snowflake account](https://www.snowflake.com/en/data-cloud/platform)
 
 ### Demo notebook
-Navigate to the notebook directory to see a demo of the pipeline running at each stage.
+Navigate to the [note book](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/notebook/demo.ipynb) file to see a demo of the pipeline running at each stage.
 
 ## Set up
 ### Set up Docker
