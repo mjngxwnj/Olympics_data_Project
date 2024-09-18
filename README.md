@@ -4,8 +4,7 @@ This project focuses on building an end-to-end data pipeline that extracts raw d
 ## Table of contents
 - [Architecture](#Architecture)
 - [Overview](#Overview)
-
-
+- [Schema](#Schema)
 ## Architecture
 ![Architecture](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
 ## Overview
@@ -19,7 +18,9 @@ This project focuses on building an end-to-end data pipeline that extracts raw d
 ├───data                   # Data files
 ├───images                 # Images
 ├───jars                   # JAR files for configuration between Spark and Snowflake
-└───notebook               # Notebooks for Exploratory Data Analysis (EDA)
+└───notebook               # Notebooks for Demo data pipeline
 ```
 ### Schema
+Here is the schema based on snowflake schema model, which includes 3 fact tables and 8 dimensional tables.
 ![Schema](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_schema.png)
+
