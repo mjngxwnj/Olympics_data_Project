@@ -42,10 +42,11 @@ After that, run the following command to start Docker Compose (make sure Docker 
 docker-compose up
 ```
 ### Set up Airflow
-At first, go to [localhost:8080](http://localhost:8080), then log in to Airflow with username: `admin`, password: `admin`
-Then, via `Admin` -> `Connection`, then edit `spark_default`.
-Setting spark looks like:
-[spark_default]()
+First, go to [localhost:8080](http://localhost:8080), then log in to Airflow with username: `admin`, password: `admin`
+Next, navigate `Admin` -> `Connection`, and edit `spark_default` connection.
+The Spark setting should look like this:
+[spark_default](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Airflow_Spark.PNG)
+
 
 
 
