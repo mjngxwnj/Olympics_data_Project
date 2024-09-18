@@ -22,5 +22,6 @@ This project focuses on building an end-to-end data pipeline that extracts raw d
 ```
 ### Schema
 Here is the schema based on snowflake schema model, which includes 3 fact tables and 8 dimensional tables.
+This schema will be applied in data warehouse.
 ![Schema](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_schema.png)
 
