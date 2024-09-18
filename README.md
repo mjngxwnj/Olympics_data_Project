@@ -8,6 +8,7 @@ This project focuses on building an end-to-end data pipeline that extracts raw d
   - [Set up Docker](#Set-up-Docker)
   - [Set up Airflow](#Set-up-Airflow)
   - [Run pipeline](#Run-pipeline)
+- [Visualization](#Visualization)
 ## Architecture
 ![Architecture](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
 ## Overview
@@ -81,4 +82,9 @@ In each directory listed above, we can see all the tables we loaded.
 Then, all tables in data warehouse will be created. 
 
 ![snowflake finish](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_finish.PNG)
+
+## Visualization
+First, go to [localhost:8088](http://localhost:8088) to see Superset, with username: `admin` and password: `admin`.
+
+In the top right corner, navigate to `Setting` -> `Database Connections` -> `+ DATABASE`. Choose `Supported databases` and select `Other`, enter the connection string in the format: `snowflake://{user}:{password}@{account}.{region}/{database}?role={role}&warehouse={warehouse}`. Replace the placeholders with your Snowflake information.information.
 
