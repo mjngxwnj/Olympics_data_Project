@@ -5,8 +5,8 @@ This project focuses on building an end-to-end data pipeline that extracts raw d
 - [Architecture](#Architecture)
 - [Overview](#Overview)
 - [Set up](#Set-up)
-  - [Set up docker](#Set-up-docker)
-  - [Set up airflow](#Set-up-airflow)
+  - [Set up Docker](#Set-up-Docker)
+  - [Set up Airflow](#Set-up-Airflow)
   - [Run pipeline](#Run-pipeline)
 ## Architecture
 ![Architecture](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
@@ -31,15 +31,18 @@ This schema will be applied in the data warehouse.
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Snowflake account](https://www.snowflake.com/en/data-cloud/platform)
 ## Set up
-### Set up docker
+### Set up Docker
 Clone this project by running the following commands:
 ```
 git clone https://github.com/mjngxwnj/Olympics_data_Project.git
 cd Olympics_data_Project
 ```
-After that, run the following command to start Docker Compose: (Make sure that you downloaded docker and docker is running)
+After that, run the following command to start Docker Compose (make sure Docker is installed and running):
 ```
 docker-compose up
 ```
-### Set up airflow
+### Set up Airflow
+At first, go to [localhost:8080](http://localhost:8080), then log in to Airflow with username: `admin`, password: `admin`
+Then, via connections, add spark connection for Airflow.
+
 
