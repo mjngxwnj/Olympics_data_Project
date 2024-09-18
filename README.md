@@ -54,6 +54,10 @@ Go to Snowflake account, navigate Database and create Database OLYMPICS_DB, two 
 
 ![snowflake create](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_create.PNG)
 
+Go to [localhost:9870](http://localhost:9870).
+
+Initially, HDFS will be empty.
+
 To trigger the DAG, click `trigger DAG` in the top right corner. The pipeline will start.
 
 ![trigger dag](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Dag.PNG)
@@ -61,10 +65,6 @@ To trigger the DAG, click `trigger DAG` in the top right corner. The pipeline wi
 After the DAG runs successfully:
 
 ![dag finish](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Dag_finish.PNG)
-
-Go to [localhost:9870](http://localhost:9870).
-
-Initially, HDFS will be empty.
 
 ![hdfs_empty](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/HDFS.PNG)
 
