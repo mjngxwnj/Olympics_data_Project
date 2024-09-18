@@ -4,9 +4,10 @@ This project focuses on building an end-to-end data pipeline that extracts raw d
 ## Table of contents
 - [Architecture](#Architecture)
 - [Overview](#Overview)
-- [Schema](#Schema)
-- [Prerequisite](#Prerequisite)
 - [Set up](#Set-up)
+  - [Set up docker](#Set-up-docker)
+  - [Set up airflow](#Set-up-airflow)
+  - [Run pipeline](#Run-pipeline)
 ## Architecture
 ![Architecture](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
 ## Overview
@@ -29,5 +30,11 @@ This schema will be applied in the data warehouse.
 ### Prerequisite
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Snowflake account](https://www.snowflake.com/en/data-cloud/platform)
-### Set up
+## Set up
+Clone this project, using:
+'''
+git clone https://github.com/mjngxwnj/Olympics_data_Project.git
+cd Olympics_data_Project
+'''
+
 
