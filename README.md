@@ -32,9 +32,9 @@ This schema will be applied in the data warehouse.
 - [Snowflake account](https://www.snowflake.com/en/data-cloud/platform)
 ## Set up
 Clone this project, using:
-'''
+```
 git clone https://github.com/mjngxwnj/Olympics_data_Project.git
 cd Olympics_data_Project
-'''
+```
 
 
