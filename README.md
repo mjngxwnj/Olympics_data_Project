@@ -6,7 +6,7 @@ This project focuses on building an end-to-end data pipeline that extracts raw d
 - [Overview](#Overview)
 - [Schema](#Schema)
 - [Prerequisite](#Prerequisite)
-- [Set up](#Setup)
+- [Set up](#Set-up)
 ## Architecture
 ![Architecture](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Architecture.png)
 ## Overview
