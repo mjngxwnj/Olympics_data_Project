@@ -51,7 +51,9 @@ Save the connection, then go back to the DAGs page to prepare for triggering the
 Go to Snowflake account, navigating Database and create Database OLYMPICS_DB, two Schemas OLYMPICS_SCHEMA and REPORT.
 ![trigger dag](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Dag.PNG)
 To trigger the DAG, click `trigger DAG` in the top right corner. The pipeline will start.
+
 Go to [localhost:9870](http://localhost:9870).
+
 Initially, HDFS will be empty.
 ![hdfs_empty](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/HDFS.PNG)
 As Olympics_data DAG runs, the data will be loaded into HDFS.
