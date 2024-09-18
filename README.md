@@ -26,6 +26,7 @@ This project focuses on building an end-to-end data pipeline that extracts raw d
 ### Schema
 Here is the schema based on snowflake schema model, which includes 3 fact tables and 8 dimensional tables.
 This schema will be applied in the data warehouse.
+
 ![Schema](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_schema.png)
 ### Prerequisite
 - [Docker](https://www.docker.com/products/docker-desktop)
@@ -45,6 +46,7 @@ docker-compose up
 First, go to [localhost:8080](http://localhost:8080), then log in to Airflow with username: `admin`, password: `admin`.
 Next, navigate `Admin` -> `Connection`, and edit `spark_default` connection.
 The Spark setting should look like this:
+
 ![spark_default](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Airflow_Spark.PNG)
 Save the connection, then go back to the DAGs page to prepare for triggering the DAGs.
 ### Run pipeline
