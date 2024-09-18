@@ -86,5 +86,10 @@ Then, all tables in data warehouse will be created.
 ## Visualization
 First, go to [localhost:8088](http://localhost:8088) to see Superset, with username: `admin` and password: `admin`.
 
-In the top right corner, navigate to `Setting` -> `Database Connections` -> `+ DATABASE`. Choose `Supported databases` and select `Other`, enter the connection string in the format: `snowflake://{user}:{password}@{account}.{region}/{database}?role={role}&warehouse={warehouse}`. Replace the placeholders with your Snowflake information.information.
+In the top right corner, navigate to `Setting` -> `Database Connections` -> `+ DATABASE`. Choose `Supported databases` and select `Other`, enter the connection string in the format: `snowflake://{user}:{password}@{account}.{region}/{database}?role={role}&warehouse={warehouse}`. Replace the placeholders with your Snowflake information.
 
+Then, you can select tables in Snowflake using SQL Lab and create a dashboard according to your preferences.
+
+Here is my custom dashboard for visualizing data about the Olympics games:
+
+[report](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Superset_report.jpg)
