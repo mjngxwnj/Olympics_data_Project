@@ -31,6 +31,10 @@ This schema will be applied in the data warehouse.
 ### Prerequisite
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Snowflake account](https://www.snowflake.com/en/data-cloud/platform)
+
+### Demo notebook
+Navigate to the notebook directory to see a demo of the pipeline running at each stage.
+
 ## Set up
 ### Set up Docker
 Clone this project by running the following commands:
@@ -77,5 +81,4 @@ In each directory listed above, we can see all the tables we loaded.
 Then, all tables in data warehouse will be created. 
 
 ![snowflake finish](https://github.com/mjngxwnj/Olympics_data_Project/blob/master/images/Snowflake_finish.PNG)
-
 
